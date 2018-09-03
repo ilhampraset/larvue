@@ -7,14 +7,11 @@
 	  <div class="col-md-12 col-sm-12 col-xs-12">
 	    <div class="x_panel">
 	      <div class="x_title">
-	        <h2>Tes Input</h2>
+	        <h2></h2>
 	        <div class="clearfix"></div>
 	      </div>
 	      <div class="x_content">
-	      	<div>
-	      		<input id="name" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="name" v-model='newName' required="required" type="text">
-	      		<button class="btn btn-primary" @click.self='change'>Change Name</button>
-	      	</div>
+	      	
 	        <form class="form-horizontal form-label-left" novalidate>
 
 	          <div class="item form-group">
@@ -46,7 +43,7 @@
 	            </div>
 	          </div>
 	        </form>
-	          <button id="send" @click='redi()' class="btn btn-success">Submit</button>
+	          
 	      </div>
 	    </div>
 	  </div>
@@ -69,11 +66,16 @@ export default {
 	},
 	mounted() {
 		 console.log(this.$store.dispatch('fetch'))
+		 //$( "body" ).removeClass( "nav-md" ).addClass( "nav-sm" );
+		
 	},
 	computed: {
     	value() {
     		return  this.$store.state.users
     	},
+    	locals() {
+    		return 
+    	}
     	
     },
     
@@ -84,14 +86,14 @@ export default {
     	]),
     	change : function() {
 
-    	  
+    	  localStorage.setItem('name', this.newName)
     	  return this.changeName(this.newName)
     	},
-    	fetchData : ()=> {
+    	/*fetchData : ()=> {
     		return this.fetch()	
-    	},
+    	},*/
     	redi() {
-    		 console.log(this.$router)
+    		 return this.$router.push('/back-office/product/create')
     	}
     	
     	

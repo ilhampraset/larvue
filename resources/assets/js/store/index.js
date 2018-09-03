@@ -29,9 +29,7 @@ const store = new Vuex.Store({
   				}, 1000),
   	fetch({ commit }) {
             return axios.get(api)
-			        	.then(r =>  r.data)
-			        	.then(emp => emp[0])
-			        	.then(res => console.log(res.FIRST_NAME +' '+res.LAST_NAME))
+			        	.then(r =>  console.log(r.data))
 			        	.catch()
         },
   					

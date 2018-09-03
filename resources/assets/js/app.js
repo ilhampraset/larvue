@@ -22,7 +22,7 @@ import Box from './components/Box';
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('page-title', PageTitle);
 Vue.component('left-title', LeftTitle);
@@ -30,11 +30,9 @@ Vue.component('right-title', RightTitle);
 Vue.component('box', Box);
 
 
-
-
 const app = new Vue({
     el: '#app',
-    components: {App},
     store,
-    router
-});
+    router, 
+    render: h => h(App)
+})

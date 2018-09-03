@@ -90,6 +90,9 @@ export default {
 
  	}
  },
+ mounted() {
+ 	document.title = 'Dashboard';
+ },
  computed: {
     	value() {
     		return  this.$store.state.users
