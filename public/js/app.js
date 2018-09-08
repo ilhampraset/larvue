@@ -26042,7 +26042,6 @@ module.exports = {
 			}
 
 			this.$emit('pagination-change-page', page);
-			
 		},
 		getPages: function() {
 			if (this.limit === -1) {

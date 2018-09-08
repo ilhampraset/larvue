@@ -12,9 +12,21 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('login', 'API\UserController@login');
-Route::post('register', 'API\UserController@register');
-Route::group(['middleware' => 'auth:api'], function(){
-Route::get('details', 'API\UserController@details');
-Route::get('employees', 'API\EmployeesController@index');
+Route::post('login', 'API\AuthController@login');
+Route::post('register', 'API\AuthController@register');
+
+Route::middleware(['cors'])->namespace('API')->group(function() {
+
+	Route::prefix('users')->group(function() {
+		Route::get('/', 'UserController@index');
+
+		Route::get('/show/{id?}', 'UserController@show');
+	});
+
+	Route::prefix('employees')->group(function() {
+		Route::get('/', 'EmployeeController@index');
+
+		Route::get('/show/{id}', 'EmployeeController@show');
+	});
+
 });
