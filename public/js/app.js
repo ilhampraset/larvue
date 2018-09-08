@@ -11482,7 +11482,7 @@ module.exports = Vue;
 "use strict";
 /* unused harmony export Store */
 /* unused harmony export install */
-/* unused harmony export mapState */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapState; });
 /* unused harmony export mapMutations */
 /* unused harmony export mapGetters */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapActions; });
@@ -26042,7 +26042,6 @@ module.exports = {
 			}
 
 			this.$emit('pagination-change-page', page);
-			
 		},
 		getPages: function() {
 			if (this.limit === -1) {
@@ -48685,7 +48684,7 @@ router.beforeEach(function (to, from, next) {
             if(!response){
                 return next({ path : '/login'})
             }
-              return next()
+             return next()
         })*/
 
         if (!auth) {
@@ -48701,7 +48700,7 @@ router.beforeEach(function (to, from, next) {
              if(response){
                  return next({ path : '/'})
              }
-               return next()
+              return next()
          })*/
         auth = localStorage.getItem('auth_token');
         if (auth) {
@@ -48977,6 +48976,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -48996,25 +48999,26 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 name: '',
                 pageLength: 10
             }
+
         };
     },
     mounted: function mounted() {
-        console.log(this.$store.dispatch('fetch'));
         document.title = 'Some new title';
         this.getEmployees();
         //$( "body" ).removeClass( "nav-md" ).addClass( "nav-sm" );
     },
 
-    computed: {
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapState */])(['employeesField']), {
         value: function value() {
             return this.$store.state.users;
         },
-        locals: function locals() {
-            return;
+        employesField: function employesField() {
+            return console.log(this.employeesField);
         }
-    },
+    }),
 
     methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["b" /* mapActions */])(['changeName', 'fetch']), {
+
         change: function change() {
 
             localStorage.setItem('name', this.newName);
@@ -49035,10 +49039,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 page = 1;
             }
             var url = __WEBPACK_IMPORTED_MODULE_1__services_helper__["a" /* default */].getFilterURL(this.filterEmployeesForm);
-            console.log(this.url);
-            axios.get('/api/employees?page=' + page + url).then(function (response) {
+
+            axios.get('https://jsonplaceholder.typicode.com/posts').then(function (response) {
                 _this.employees = response.data;
-                _this.$router.push('/back-office/employees?page=' + page);
+                console.log(_this.employees);
+                //this.$router.push('/back-office/employees?page=' + page)
             });
         }
     })
@@ -49168,80 +49173,66 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-6" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "dataTables_filter",
-                      attrs: { id: "datatable_filter" }
-                    },
-                    [
-                      _c("label", [
-                        _vm._v("Search by Name:"),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.filterEmployeesForm.name,
-                              expression: "filterEmployeesForm.name"
-                            }
-                          ],
-                          staticClass: "form-control input-sm",
-                          attrs: {
-                            placeholder: "",
-                            "aria-controls": "datatable"
-                          },
-                          domProps: { value: _vm.filterEmployeesForm.name },
-                          on: {
-                            blur: _vm.getEmployees,
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.filterEmployeesForm,
-                                "name",
-                                $event.target.value
-                              )
-                            }
-                          }
+                  _c("div", { attrs: { id: "datatable_filter" } }, [
+                    _c("label", [
+                      _vm._v("Search by:\n                   "),
+                      _c(
+                        "select",
+                        { staticClass: "form-control input-sm" },
+                        _vm._l(_vm.employeesField, function(emplField) {
+                          return _c(
+                            "option",
+                            { domProps: { value: emplField } },
+                            [_vm._v(_vm._s(emplField))]
+                          )
                         })
-                      ]),
+                      ),
                       _vm._v(" "),
-                      _c("label", [
-                        _vm._v("Search by Email:"),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.filterEmployeesForm.all,
-                              expression: "filterEmployeesForm.all"
-                            }
-                          ],
-                          staticClass: "form-control input-sm",
-                          attrs: {
-                            placeholder: "",
-                            "aria-controls": "datatable"
-                          },
-                          domProps: { value: _vm.filterEmployeesForm.all },
-                          on: {
-                            blur: _vm.getEmployees,
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.filterEmployeesForm,
-                                "all",
-                                $event.target.value
-                              )
-                            }
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.filterEmployeesForm.name,
+                            expression: "filterEmployeesForm.name"
                           }
-                        })
-                      ])
-                    ]
-                  )
+                        ],
+                        staticClass: "form-control input-sm",
+                        attrs: {
+                          placeholder: "",
+                          "aria-controls": "datatable"
+                        },
+                        domProps: { value: _vm.filterEmployeesForm.name },
+                        on: {
+                          keyup: function($event) {
+                            if (
+                              !("button" in $event) &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            return _vm.getEmployees($event)
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.filterEmployeesForm,
+                              "name",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
                 ])
               ]),
               _vm._v(" "),
@@ -49270,7 +49261,14 @@ var render = function() {
                           }
                         },
                         [
-                          _vm._m(0),
+                          _c("thead", [
+                            _c(
+                              "tr",
+                              _vm._l(_vm.employeesField, function(empField) {
+                                return _c("th", [_vm._v(_vm._s(empField))])
+                              })
+                            )
+                          ]),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -49366,28 +49364,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Position")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Phone Number")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Start date")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Salary")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -49951,7 +49928,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('http://localhost:8000/api/login', this.loginForm).then(function (response) {
                 localStorage.setItem('auth_token', response.data.success.token);
-                axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('auth_token');
                 //console.log(response.data.success.token)
                 //toastr['success'](response['success'].message);
                 window.location.href = '/back-office';
@@ -55902,7 +55878,7 @@ exports = module.exports = __webpack_require__(87)(false);
 
 
 // module
-exports.push([module.i, "\n.fade-enter-active[data-v-0ce21db6],\r\n.fade-leave-active[data-v-0ce21db6] {\r\n  -webkit-transition-duration: 0.3s;\r\n          transition-duration: 0.3s;\r\n  -webkit-transition-property: opacity;\r\n  transition-property: opacity;\r\n  -webkit-transition-timing-function: ease;\r\n          transition-timing-function: ease;\n}\n.fade-enter[data-v-0ce21db6],\r\n.fade-leave-active[data-v-0ce21db6] {\r\n  opacity: 0\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n.fade-enter-active[data-v-0ce21db6],\n.fade-leave-active[data-v-0ce21db6] {\n  -webkit-transition-duration: 0.3s;\n          transition-duration: 0.3s;\n  -webkit-transition-property: opacity;\n  transition-property: opacity;\n  -webkit-transition-timing-function: ease;\n          transition-timing-function: ease;\n}\n.fade-enter[data-v-0ce21db6],\n.fade-leave-active[data-v-0ce21db6] {\n  opacity: 0\n}\n\n", ""]);
 
 // exports
 
@@ -56502,12 +56478,14 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
   state: {
     count: 0,
     users: { name: 'jhon doe', email: 'ho@gmail.com', number: '0812121' },
-    employees: []
+    employees: [],
+    employeesField: ['Name', 'Position', 'Email', 'Phone Number', 'Start Date', 'Salary']
   },
   getters: {
     count: function count(state) {
       return state.count + 2;
     }
+
   },
   mutations: {
     increment: function increment(state) {
@@ -56529,14 +56507,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
       return setTimeout(function () {
         commit('changeName', name);
       }, 1000);
-    },
-    fetch: function fetch(_ref2) {
-      var commit = _ref2.commit;
-
-      return axios.get(api).then(function (r) {
-        return console.log(r.data);
-      }).catch();
     }
+
   }
 });
 
