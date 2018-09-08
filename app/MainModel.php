@@ -31,8 +31,13 @@ class MainModel extends Model
 		}
 	}
 
-	public function scopeOrder($query, $field, $asc_or_desc = 'asc') {
-		return $query->orderBy($this->table.'.'.$field, $asc_or_desc);
+	public function scopeOrder($query, $field = '', $asc_or_desc = 'asc') {
+		if( ! empty($field) ) {
+			return $query->orderBy($this->table.'.'.$field, $asc_or_desc);
+		}
+		else {
+			return $query->orderBy($this->table.'.'.$this->primaryKey, $asc_or_desc);
+		}
 	}
 
 	public function scopePerPage($query, $limit = 30) {

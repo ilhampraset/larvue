@@ -11,7 +11,9 @@ class Employee extends Model
 	 *
 	 * @var string
 	 */
-	protected $table = 'employees';
+    protected $table = 'employees';
+    
+    protected $primaryKey = 'EMPLOYEE_ID';
 
     /**
      * The accessors to append to the model's array form.
@@ -50,12 +52,12 @@ class Employee extends Model
         }
     }
     
-    public function scopeOrder($query, $field, $asc_or_desc = 'asc') {
+    public function scopeOrder($query, $field = '', $asc_or_desc = 'asc') {
         if($field == 'Name') {
             return $query->orderBy(\DB::raw('CONCAT('.$this->table.'.FIRST_NAME, " ", '.$this->table.'.LAST_NAME)'), $asc_or_desc);
         }
         else {
-            return static::scopeOrder($query, $field, $asc_or_desc);
+            return parent::scopeOrder($query, $field, $asc_or_desc);
         }
 	}
 

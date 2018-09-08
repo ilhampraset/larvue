@@ -46,12 +46,11 @@ class ApiController extends Controller
 
 			$this->model = $this->model->search($search, $search_field);
         }
-        elseif( request()->has('order') ) {
-			$order = request('order');
-			$atoz = request()->has('atoz') ? request('atoz') : 'asc';
-			
-			$this->model = $this->model->order($order, $atoz);
-		}
+
+		$order = request()->has('order') ? request('order') : $this->model->getKeyName();
+		$atoz = request()->has('atoz') ? request('atoz') : 'asc';
+		
+		$this->model = $this->model->order($order, $atoz);
 
 		return $this->model->paginate(
 			request()->has('page_len') 
