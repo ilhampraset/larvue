@@ -35,5 +35,14 @@ class Employee extends Model
 	 * SCOPES
 	 * ---------
 	**/
-
+	public function scopeSearch($query, $string, $field = '') {
+		if( ! empty($field) && $field == 'Name' ) {
+			return $query->where(function($q) use ($string, $field) {
+				$q->orWhere(\DB::raw("CONCAT(FIRST_NAME, ' ', LAST_NAME)"), 'LIKE', '%'.$string.'%');
+			});
+        }
+        else {
+            return parent::scopeSearch($query, $string, $field);
+        }
+	}
 }
