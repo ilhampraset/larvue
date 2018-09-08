@@ -13,6 +13,23 @@ class Employee extends Model
 	 */
 	protected $table = 'employees';
 
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['Name'];
+
+
+	/**
+	 * =========================
+	 * ACCESSORS
+	 * ---------
+	**/
+	public function getNameAttribute() {
+		return $this->FIRST_NAME.' '.$this->LAST_NAME;
+	}
+
 	/**
 	 * =========================
 	 * SCOPES
