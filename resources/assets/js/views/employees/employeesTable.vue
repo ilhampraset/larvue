@@ -26,10 +26,19 @@
 	      			</div>
 	      		</div>
 	      		<div class="col-sm-6">
-	      			<div id="datatable_filter" class="dataTables_filter">
-	      				<label>Search by Name:<input  class="form-control input-sm" placeholder="" aria-controls="datatable" v-model="filterEmployeesForm.name" @blur="getEmployees"></label>
-                <label>Search by Email:<input  class="form-control input-sm" placeholder="" aria-controls="datatable" v-model="filterEmployeesForm.all" @blur="getEmployees"></label>
+	      			<div id="datatable_filter" >
+	      				<label>Search by:
+                   <select class="form-control input-sm">
+                        <option v-for='emplField in employeesField' :value='emplField'>{{emplField}}</option>
+                  </select>
+                  <input  class="form-control input-sm" 
+                          placeholder="" 
+                          aria-controls="datatable" 
+                          v-model="filterEmployeesForm.name" 
+                          @keyup.enter="getEmployees">
+                </label>
 	      			</div>
+              
 	      		</div>
 	      	</div>
 	      	<div class="row">
@@ -39,12 +48,7 @@
 	      			<table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info" v-if="employees.total">
                       <thead>
                         <tr>
-                        	<th>Name</th>
-                          <th>Position</th>
-                        	<th>Email</th>
-                        	<th>Phone Number</th>
-                          <th>Start date</th>
-                        	<th>Salary</th>
+                        	<th v-for='empField in employeesField'>{{empField}}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -85,7 +89,7 @@
 
 import pagination from 'laravel-vue-pagination'
 import helper from '../../services/helper'
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 export default {
 
 	data(){
@@ -101,23 +105,27 @@ export default {
                     name: '',
                     pageLength: 10
                 }
+
+
 		}
       
 		
 	},
 	mounted() {
-		 console.log(this.$store.dispatch('fetch'))
      document.title = 'Some new title';
      this.getEmployees()
 		 //$( "body" ).removeClass( "nav-md" ).addClass( "nav-sm" );
 		
 	},
 	computed: {
+       ...mapState([
+          'employeesField'
+      ]),
     	value() {
     		return  this.$store.state.users
     	},
-    	locals() {
-    		return 
+    	employesField() {
+    		return console.log(this.employeesField)
     	}
     	
     },
@@ -127,6 +135,7 @@ export default {
     		 'changeName',
     		 'fetch'
     	]),
+      
     	change : function() {
 
     	  localStorage.setItem('name', this.newName)
@@ -145,14 +154,14 @@ export default {
                   page = 1;
               }
               let url = helper.getFilterURL(this.filterEmployeesForm);
-                console.log(this.url)
-              axios.get('/api/employees?page=' + page + url)
+
+              axios.get('https://jsonplaceholder.typicode.com/posts')
                   .then((response) => {
                     this.employees = response.data 
-                    this.$router.push('/back-office/employees?page=' + page)
+                    console.log(this.employees)
+                    //this.$router.push('/back-office/employees?page=' + page)
                   });
           },
-    	
     	
     }
 }

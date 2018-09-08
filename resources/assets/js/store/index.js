@@ -10,10 +10,12 @@ const store = new Vuex.Store({
   state: {
     count: 0,
     users : {name: 'jhon doe', email:'ho@gmail.com', number:'0812121'},
-    employees : []
+    employees : [],
+    employeesField: ['Name', 'Position', 'Email', 'Phone Number', 'Start Date', 'Salary']
   },
   getters: {
     count : state => state.count + 2,
+    
   },
   mutations: {
     increment : state =>state.count++,
@@ -26,13 +28,7 @@ const store = new Vuex.Store({
   actions:{
   	changeName : ({commit}, name) => setTimeout(()=>{
   					commit('changeName', name)
-  				}, 1000),
-  	fetch({ commit }) {
-            return axios.get(api)
-			        	.then(r =>  console.log(r.data))
-			        	.catch()
-        },
-  					
+  				}, 1000),	
   				
   }
 })

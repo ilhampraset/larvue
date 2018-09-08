@@ -53,7 +53,6 @@
                 
                 axios.post('http://localhost:8000/api/login', this.loginForm).then(response =>  {
                     localStorage.setItem('auth_token',response.data.success.token);
-                    axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('auth_token');
                     //console.log(response.data.success.token)
                     //toastr['success'](response['success'].message);
                     window.location.href='/back-office'
