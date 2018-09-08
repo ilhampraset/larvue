@@ -38,11 +38,25 @@ class Employee extends Model
 	public function scopeSearch($query, $string, $field = '') {
 		if( ! empty($field) && $field == 'Name' ) {
 			return $query->where(function($q) use ($string, $field) {
-				$q->orWhere(\DB::raw("CONCAT(FIRST_NAME, ' ', LAST_NAME)"), 'LIKE', '%'.$string.'%');
+				$q->orWhere(
+                    \DB::raw('CONCAT('.$this->table.'.FIRST_NAME, " ", '.$this->table.'.LAST_NAME)'), 
+                    'LIKE', 
+                    '%'.$string.'%'
+                );
 			});
         }
         else {
             return parent::scopeSearch($query, $string, $field);
         }
+    }
+    
+    public function scopeOrder($query, $field, $asc_or_desc = 'asc') {
+        if($field == 'Name') {
+            return $query->orderBy(\DB::raw('CONCAT('.$this->table.'.FIRST_NAME, " ", '.$this->table.'.LAST_NAME)'), $asc_or_desc);
+        }
+        else {
+            return static::scopeOrder($query, $field, $asc_or_desc);
+        }
 	}
+
 }
