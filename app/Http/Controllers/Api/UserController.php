@@ -14,7 +14,7 @@ class UserController extends ApiController
         return $this->responseSuccess(User::all());
     }
 
-    public function show($id = null) 
+    public function get($id = null) 
     { 
         $user = Auth::user();
 
@@ -23,12 +23,10 @@ class UserController extends ApiController
                 $user = User::findOrFail($id);
             }
             catch(\Exception $e) {
-                return $this->responseError(['error' => 'User Not Found!']);
+                $user = $this->responseError(['error' => 'User Not Found!']);
             }    
         }
 
-        return $this->responseSuccess([
-            'user'  => $user
-        ]); 
+        return $user; 
     } 
 }

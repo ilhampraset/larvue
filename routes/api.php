@@ -19,14 +19,22 @@ Route::middleware(['cors'])->namespace('API')->group(function() {
 
 	Route::prefix('users')->group(function() {
 		Route::get('/', 'UserController@index');
+		Route::get('get/{id?}', 'UserController@get');
 
-		Route::get('/show/{id?}', 'UserController@show');
+		Route::post('add', 'UserController@add');
+		Route::put('edit/{id}', 'UserController@edit');
+
+		Route::delete('delete/{id}', 'UserController@delete');
 	});
 
 	Route::prefix('employees')->group(function() {
 		Route::get('/', 'EmployeeController@index');
+		Route::get('get/{id}', 'EmployeeController@get');
 
-		Route::get('/show/{id}', 'EmployeeController@show');
+		Route::post('add', 'EmployeeController@add');
+		Route::put('edit/{id}', 'EmployeeController@edit');
+
+		Route::delete('delete/{id}', 'EmployeeController@delete');
 	});
 
 });

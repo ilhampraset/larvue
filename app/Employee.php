@@ -13,7 +13,16 @@ class Employee extends Model
 	 */
     protected $table = 'employees';
     
-    protected $primaryKey = 'EMPLOYEE_ID';
+	protected $primaryKey = 'EMPLOYEE_ID';
+	
+	public $timestamps = false;
+
+	/**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['EMPLOYEE_ID', 'FIRST_NAME', 'LAST_NAME', 'EMAIL', 'PHONE_NUMBER', 'HIRE_DATE', 'JOB_ID', 'SALARY', 'COMMISION_PCT', 'MANAGER_ID', 'DEPARTMENT_ID'];
 
     /**
      * The accessors to append to the model's array form.

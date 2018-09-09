@@ -6,10 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class MainModel extends Model
 {
+	/**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+	protected $guarded = []; // empty to make all attributes mass assignable
+
+	
+	/**
+	 * =========================
+	 * PUBLIC METHODS
+	 * ---------
+	**/
 	public function getTableColumns() {
 		return $this->getConnection()->getSchemaBuilder()->getColumnListing($this->getTable());
 	}
 	
+
 	/**
 	 * =========================
 	 * MAIN SCOPES
