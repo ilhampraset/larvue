@@ -111,9 +111,9 @@ class ApiController extends Controller
 	}
 
 	/**
-	 * Route::get('/get/{id}')
+	 * Route::get('/{id}')
 	 */
-	public function get($id = null) 
+	public function show($id) 
 	{
 		try {
 			return $this->model->findOrFail($id);
@@ -132,9 +132,9 @@ class ApiController extends Controller
 	}
 
 	/**
-	 * Route::post('/add')
+	 * Route::post('/')
 	 */
-	public function add(Request $request) 
+	public function store(Request $request) 
 	{
 		$this->validateStoreRequest($request);
 
@@ -146,9 +146,9 @@ class ApiController extends Controller
 	}
 
 	/**
-	 * Route::put('/edit/{id}')
+	 * Route::put('/{id}')
 	 */
-	public function edit(Request $request, $id) 
+	public function update(Request $request, $id) 
 	{
 		$this->validateUpdateRequest($request, $id);
 
@@ -175,9 +175,9 @@ class ApiController extends Controller
 	}
 
 	/**
-	 * Route::delete('/delete/{id}')
+	 * Route::delete('/{id}')
 	 */
-	public function delete($id) 
+	public function destroy($id) 
 	{
 		try {
 			$data = $this->model->findOrFail($id);
