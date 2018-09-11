@@ -1,8 +1,8 @@
 <?php
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Api\ApiController; 
+use App\Http\Controllers\API\ApiController; 
 
 use App\Employee;
 

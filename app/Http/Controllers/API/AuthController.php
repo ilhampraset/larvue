@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Api\ApiController; 
+use App\Http\Controllers\API\ApiController; 
 use Illuminate\Http\Request; 
 use Illuminate\Support\Facades\Auth; 
 use Validator;
