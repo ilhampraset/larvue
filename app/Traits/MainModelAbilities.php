@@ -3,7 +3,7 @@ namespace App\Traits;
 
 use App\Contracts\MainModelContract;
 
-trait MainModelTrait {
+trait MainModelAbilities {
 	
 	/**
 	 * =========================

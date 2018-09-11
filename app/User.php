@@ -6,12 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Contracts\MainModelContract;
-use App\Traits\MainModelTrait;
+use App\Traits\MainModelAbilities;
 
 class User extends Authenticatable implements MainModelContract
 {
     use HasApiTokens, Notifiable;
-    use MainModelTrait;
+    use MainModelAbilities;
     
     /**
      * The attributes that are mass assignable.

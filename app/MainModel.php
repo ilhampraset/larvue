@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Contracts\MainModelContract;
 
-use App\Traits\MainModelTrait;
+use App\Traits\MainModelAbilities;
 
 class MainModel extends Model implements MainModelContract
 {
-	use MainModelTrait;
+	use MainModelAbilities;
 
 	/**
      * The attributes that aren't mass assignable.
