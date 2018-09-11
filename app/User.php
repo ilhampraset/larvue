@@ -5,9 +5,13 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+use App\Contracts\MainModelContract;
+use App\Traits\MainModelTrait;
+
+class User extends Authenticatable implements MainModelContract
 {
     use HasApiTokens, Notifiable;
+    use MainModelTrait;
     
     /**
      * The attributes that are mass assignable.

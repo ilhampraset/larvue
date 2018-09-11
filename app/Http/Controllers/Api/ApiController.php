@@ -4,10 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request; 
 use App\Http\Controllers\Controller; 
+use App\Contracts\ApiResourceControllerContract as ResourceContract;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class ApiController extends Controller
+class ApiController extends Controller implements ResourceContract
 {
 	public static $STATUS_OK = 200;
 	public static $STATUS_ERROR = 400;
